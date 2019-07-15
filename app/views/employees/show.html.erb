@@ -1,0 +1,52 @@
+<div class="container-fluid bg-3 text-left">
+  <div class="row">
+    <div class="col-md-4">
+      <img src="<%= polymorphic_url(@employee.picture) %>" class="img-responsive" style="width:100%" alt="Image">
+    </div>
+    <div class="col-md-4"> 
+<p>
+  <strong>First name:</strong>
+  <%= @employee.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @employee.last_name %>
+</p>
+
+<p>
+  <strong>Ssn:</strong>
+  <%= @employee.ssn %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @employee.address %>
+</p>
+    </div>
+    <div class="col-md-4"> 
+      <%= link_to 'Edit', edit_employee_path(@employee), class: "btn btn-lg btn-success"  %>
+			<% unless Timer.last.time_in.present? and Timer.last.time_out.blank? %>
+			  <%= link_to 'Clock In', timers_clockin_path, class: "btn btn-lg btn-warning" %>
+			<% end %>
+			<%= link_to 'Clock Out', timers_clockout_path, class: "btn btn-lg btn-danger" %>
+			<br>
+			<% if Timer.last.present?%>
+			Day : <%= Timer.last.time_in.strftime("%A, %e %B %Y") %>
+			<br>
+			Time in: <%= Timer.last.time_in.strftime("%I:%M%p") %>
+			<br>
+			Time out: <%= Timer.last.time_out.strftime("%I:%M%p") if Timer.last.time_out %>
+			<br>
+			Duration: <%= ((Timer.last.time_out - Timer.last.time_in ) / 1.minute).round %> minutes
+			<br>
+			<% end %>
+    </div>
+  </div>
+</div><br>
+
+
+
+
+
+

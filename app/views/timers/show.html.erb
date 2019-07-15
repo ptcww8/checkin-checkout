@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Time in:</strong>
+  <%= @timer.time_in %>
+</p>
+
+<p>
+  <strong>Time out:</strong>
+  <%= @timer.time_out %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @timer.employee_id %>
+</p>
+
+<%= link_to 'Edit', edit_timer_path(@timer) %> |
+<%= link_to 'Back', timers_path %>

@@ -1,0 +1,32 @@
+<%= form_with(model: timer, local: true) do |form| %>
+  <% if timer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(timer.errors.count, "error") %> prohibited this timer from being saved:</h2>
+
+      <ul>
+      <% timer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :time_in %>
+    <%= form.datetime_select :time_in %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_out %>
+    <%= form.datetime_select :time_out %>
+  </div>
+
+  <div class="field">
+    <%= form.label :employee_id %>
+    <%= form.number_field :employee_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
