@@ -4,7 +4,11 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    if current_user.employee.blank?
+			 redirect_to new_employee_path
+		else
+			 redirect_to employee_path(current_user.id)
+		end
   end
 
   # GET /employees/1
