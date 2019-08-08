@@ -1,7 +1,7 @@
 <div class="container-fluid bg-3 text-left">
   <div class="row">
     <div class="col-md-4">
-      <img src="<%= polymorphic_url(@employee.picture) %>" class="img-responsive" style="width:100%" alt="Image">
+      <img src="<%= url_for(@employee.picture) if @employee.picture.attached? %>" class="img-responsive" style="width:100%" alt="Image">
     </div>
     <div class="col-md-4"> 
 <p>
@@ -31,15 +31,17 @@
 			<% end %>
 			<%= link_to 'Clock Out', timers_clockout_path, class: "btn btn-lg btn-danger" %>
 			<br>
-			<% if Timer.last.present?%>
-			Day : <%= Timer.last.time_in.strftime("%A, %e %B %Y") %>
+			<% if current_user.employee.timers.last.present?%>
+			Day : <%= current_user.employee.timers.last.time_in.strftime("%A, %e %B %Y") %>
 			<br>
-			Time in: <%= Timer.last.time_in.strftime("%I:%M%p") %>
+			Time in: <%= current_user.employee.timers.last.time_in.strftime("%I:%M%p") %>
 			<br>
-			Time out: <%= Timer.last.time_out.strftime("%I:%M%p") if Timer.last.time_out %>
+			<% if current_user.employee.timers.last.time_out %>
+			Time out: <%= current_user.employee.timers.last.time_out.strftime("%I:%M%p") %>
 			<br>
-			Duration: <%= ((Timer.last.time_out - Timer.last.time_in ) / 1.minute).round %> minutes
+			Duration: <%= ((current_user.employee.timers.last.time_out - current_user.employee.timers.last.time_in ) / 1.minute).round %> minutes
 			<br>
+			<% end %>
 			<% end %>
     </div>
   </div>
