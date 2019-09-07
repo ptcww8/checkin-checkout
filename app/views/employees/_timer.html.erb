@@ -1,0 +1,21 @@
+    <div class="col-md-4">
+      <%= link_to 'Edit', edit_employee_path(@employee), class: "btn btn-lg btn-success"  %>
+			<% if @show_clock_in %>
+			  <%= link_to 'Clock In', timers_clockin_path, class: "btn btn-lg btn-warning" %>
+			<% else %>
+			  <%= link_to 'Clock Out', timers_clockout_path, class: "btn btn-lg btn-danger" %>
+			<% end %>
+			<br>
+			<% if current_user.employee.timers.last.present?%>
+			Day : <%= current_user.employee.timers.last.time_in.strftime("%A, %e %B %Y") %>
+			<br>
+			Time in: <%= current_user.employee.timers.last.time_in.strftime("%I:%M%p") %>
+			<br>
+			<% if current_user.employee.timers.last.time_out %>
+			Time out: <%= current_user.employee.timers.last.time_out.strftime("%I:%M%p") %>
+			<br>
+			Duration: <%= ((current_user.employee.timers.last.time_out - current_user.employee.timers.last.time_in ) / 1.minute).round %> minutes
+			<br>
+			<% end %>
+			<% end %>
+    </div>

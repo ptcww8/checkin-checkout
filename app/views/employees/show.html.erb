@@ -24,26 +24,7 @@
   <%= @employee.address %>
 </p>
     </div>
-    <div class="col-md-4"> 
-      <%= link_to 'Edit', edit_employee_path(@employee), class: "btn btn-lg btn-success"  %>
-			<% unless Timer.last.time_in.present? and Timer.last.time_out.blank? %>
-			  <%= link_to 'Clock In', timers_clockin_path, class: "btn btn-lg btn-warning" %>
-			<% end %>
-			<%= link_to 'Clock Out', timers_clockout_path, class: "btn btn-lg btn-danger" %>
-			<br>
-			<% if current_user.employee.timers.last.present?%>
-			Day : <%= current_user.employee.timers.last.time_in.strftime("%A, %e %B %Y") %>
-			<br>
-			Time in: <%= current_user.employee.timers.last.time_in.strftime("%I:%M%p") %>
-			<br>
-			<% if current_user.employee.timers.last.time_out %>
-			Time out: <%= current_user.employee.timers.last.time_out.strftime("%I:%M%p") %>
-			<br>
-			Duration: <%= ((current_user.employee.timers.last.time_out - current_user.employee.timers.last.time_in ) / 1.minute).round %> minutes
-			<br>
-			<% end %>
-			<% end %>
-    </div>
+		<%= render "employees/timer"%>
   </div>
 </div><br>
 

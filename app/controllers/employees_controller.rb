@@ -17,6 +17,8 @@ class EmployeesController < ApplicationController
 		if current_user.employee.blank?
 			redirect_to new_employee_path
 		end
+		@show_clock_in = current_user.employee.timers.blank? || (current_user.employee.timers.last and current_user.employee.timers.last.time_out.present?)
+		
   end
 
   # GET /employees/new
