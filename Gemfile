@@ -70,3 +70,4 @@ group :production do
   gem 'pg'
 end
 gem 'devise-bootstrap-views'
+gem "aws-sdk-s3", require: false
