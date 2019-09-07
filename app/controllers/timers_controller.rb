@@ -4,7 +4,7 @@ class TimersController < ApplicationController
   # GET /timers
   # GET /timers.json
   def index
-    @timers = Timer.all
+    @timers = current_user.employee.timers.order(id: :desc)
   end
 
   # GET /timers/1
